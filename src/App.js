@@ -11,6 +11,7 @@ import Login from './components/Login';
 import {useIsAuthenticated} from '@azure/msal-react'
 import {AuthenticatedTemplate, UnauthenticatedTemplate} from '@azure/msal-react';
 import Logout from './components/Logout';
+import AlertShow from './components/AlertShow';
 
 
 function App({msalInstance}) {
@@ -72,7 +73,7 @@ function App({msalInstance}) {
     <MsalProvider instance={msalInstance}>
         <ProductsContexProvider value={{products,addProduct,updateProduct,deleteProduct}}>
           <AuthenticatedTemplate>
-            <Logout />
+             <Logout />
              <Product />
           </AuthenticatedTemplate>
           <UnauthenticatedTemplate>

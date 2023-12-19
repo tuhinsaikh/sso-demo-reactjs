@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 import { useProductContext } from '../contexts/ProductContext';
 
 
-export default function UpdateProductModal({productId}){
+export default function UpdateProductModal({productId, updateAlert}){
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -35,7 +35,9 @@ export default function UpdateProductModal({productId}){
       setTitle(e.target.value)
     }
     const updateProductHandler = ()=>{
-        updateProduct(productId,title)
+        updateProduct(productId,title);
+        handleClose();
+        updateAlert();
     }
       return (
           <div>

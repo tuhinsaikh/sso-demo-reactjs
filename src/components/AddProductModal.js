@@ -11,7 +11,7 @@ import { useProductContext } from '../contexts/ProductContext';
 
 
 
-export default function AddProductModal(){
+export default function AddProductModal({addAlert}){
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -50,8 +50,15 @@ export default function AddProductModal(){
         price:price,
         image:image
     }
-    addProduct(prod);
+     addProduct(prod);
+     handleClose();
+     addAlert();
+     
   }
+
+  // const alertShowing = () =>{
+  //   addAlert();
+  // }
     return (
         <div>
           <Button onClick={handleOpen} variant="outlined">Add Another Product</Button>

@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import { useProductContext } from '../contexts/ProductContext';
 import AddProductModal from '../components/AddProductModal';
 import UpdateProductModal from '../components/UpdateProductModal';
+import AlertShow from '../components/AlertShow';
 
 function Product() {
     const [productList, setProductList] = useState([]);
@@ -14,21 +15,44 @@ function Product() {
     const [title, setTitle] = useState();
     const [price, setPrice] = useState();
     const [brand, setBrand] = useState();
+    const [isAlert, setIsAlert] = useState(false);
+    const [alertMsg, setAlertMsg] = useState("");
 
 
     const {products = [], deleteProduct} = useProductContext();
     console.log(products)
     const removeHandler = (productId) =>{
-        // let product = {};
-        // axios
-        //     .delete(`https://dummyjson.com/products/${productId}`)
-        //     .then(data=>{
-        //         product = data ?.data;
-        //         setProductList(prev => prev.filter((prod)=>(prod.id!==product.id)
-        //         ))
-        //     })
         deleteProduct(productId);
+        removeAlert();
     }
+
+    const addAlert = () =>{
+        setAlertMsg("Product added Successfully")
+        setIsAlert(true);
+        setTimeout(() => {
+          setIsAlert(false);
+          setAlertMsg("");
+        }, 2000);
+    }
+
+    const updateAlert = () =>{
+      setAlertMsg("Product updated Successfully")
+      setIsAlert(true);
+      setTimeout(() => {
+        setIsAlert(false);
+        setAlertMsg("");
+      }, 2000);
+  }
+  const removeAlert = () =>{
+    setAlertMsg("Product removed Successfully")
+    setIsAlert(true);
+    setTimeout(() => {
+      setIsAlert(false);
+      setAlertMsg("");
+    }, 2000);
+}
+
+
     const Item = styled(Paper)(({ theme }) => ({
       backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
       ...theme.typography.body2,
@@ -39,7 +63,8 @@ function Product() {
     return ( 
 
     <>
-   <AddProductModal />
+    {isAlert ? <AlertShow severity={"success"} msg={alertMsg}/> :  ""}
+   <AddProductModal addAlert = {addAlert}/>
    
     <div
           style={{
@@ -81,7 +106,7 @@ function Product() {
              <button onClick={()=>removeHandler(product.id)}>
               remove
              </button>
-             <UpdateProductModal productId = {product.id} />
+             <UpdateProductModal updateAlert = {updateAlert} productId = {product.id} />
            </div>
           ))}
         </div>

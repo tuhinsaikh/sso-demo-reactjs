@@ -12,7 +12,7 @@ export const ProductsContext = createContext({
 
     addProduct : (product) => {},
     updateProduct : (product, productId) => {},
-    deleteProduct : (productId) => {}
+    deleteProduct : (productId) => {},
 })
 
 export const ProductsContexProvider = ProductsContext.Provider;
